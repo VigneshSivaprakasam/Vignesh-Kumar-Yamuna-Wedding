@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vignesh Kumar ❤️ Yamuna</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:Poppins,sans-serif;
+background:linear-gradient(135deg,#fff8ef,#fff,#f8efe1);
+overflow-x:hidden;color:#4b3424}
+body:before{
+content:"";position:fixed;inset:10px;border:3px solid #d4af37;border-radius:30px;
+pointer-events:none;animation:glow 4s linear infinite}
+@keyframes glow{50%{box-shadow:0 0 25px #d4af37}}
+#petals{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.petal{position:absolute;top:-10vh;font-size:24px;animation:fall linear infinite}
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0)}
+100%{transform:translateY(110vh) translateX(120px) rotate(360deg)}
+}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px}
+h1{font-family:Cinzel;font-size:clamp(42px,6vw,72px);color:#b8860b}
+.heart{display:inline-block;animation:beat 1s infinite}
+@keyframes beat{50%{transform:scale(1.2)}}
+.tag{font-size:22px;margin:15px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;width:100%;max-width:1100px;margin-top:40px}
+.card{background:rgba(255,255,255,.65);backdrop-filter:blur(8px);padding:25px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.1);animation:float 5s ease-in-out infinite}
+.card:nth-child(2){animation-delay:1s}.card:nth-child(3){animation-delay:2s}
+@keyframes float{50%{transform:translateY(-8px)}}
+.card h2{text-align:center;color:#b8860b}
+.count{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:15px}
+.box{background:#b8860b;color:#fff;padding:12px;border-radius:12px;min-width:65px;text-align:center}
+.timeline{padding:70px 20px;max-width:900px;margin:auto}
+.step{margin:18px 0;padding:18px;background:#fff;border-left:5px solid #d4af37;border-radius:12px}
+.buttons{text-align:center;padding:30px}
+a.btn{display:inline-block;margin:10px;padding:15px 28px;border-radius:40px;text-decoration:none;color:#fff;font-weight:bold;transition:.3s}
+.map{background:#d32f2f}.wa{background:#25D366}
+.btn:hover{transform:scale(1.08)}
+footer{text-align:center;padding:35px;color:#777}
+.music{position:fixed;right:20px;bottom:20px;background:#b8860b;color:#fff;border:none;padding:14px 18px;border-radius:50px;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="petals"></div>
+<section class="hero">
+<div style="font-size:55px">💍</div>
+<h1>Vignesh Kumar <span class="heart">❤️</span> Yamuna</h1>
+<div class="tag">Together with our families, we joyfully invite you to celebrate our wedding.</div>
+
+<div class="cards">
+<div class="card"><h2>💐 Engagement</h2><p style="text-align:center">13 September 2026</p><div class="count" id="eng"></div></div>
+<div class="card"><h2>🎉 Reception</h2><p style="text-align:center">31 October 2026</p><div class="count" id="rec"></div></div>
+<div class="card"><h2>💍 Wedding</h2><p style="text-align:center">1 November 2026</p><div class="count" id="wed"></div></div>
+</div>
+</section>
+
+<section class="timeline">
+<h2 style="text-align:center;color:#b8860b;font-family:Cinzel;margin-bottom:20px">Our Celebration</h2>
+<div class="step">💐 <b>Engagement</b> — 13 September 2026</div>
+<div class="step">🎉 <b>Reception</b> — 31 October 2026</div>
+<div class="step">💍 <b>Wedding Ceremony</b> — 1 November 2026</div>
+</section>
+
+<div class="buttons">
+<a class="btn map" target="_blank" href="https://maps.app.goo.gl/iPwVBaiHaQXkBGay5">📍 View Venue</a>
+<a class="btn wa" id="share" target="_blank">💌 Save the Date</a>
+</div>
+
+<footer>Made with ❤️ for Vignesh Kumar & Yamuna</footer>
+
+<button class="music" onclick="toggleMusic()">🎵 Music</button>
+<audio id="bgm" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5d4b7fdde4.mp3?filename=wedding-110624.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const events={
+eng:new Date("2026-09-13T09:00:00"),
+rec:new Date("2026-10-31T18:00:00"),
+wed:new Date("2026-11-01T06:00:00")
+};
+function draw(id,date){
+let d=date-new Date();
+let el=document.getElementById(id);
+if(d<=0){el.innerHTML="<b>🎉 Today!</b>";return;}
+let days=Math.floor(d/86400000),hrs=Math.floor(d%86400000/3600000),min=Math.floor(d%3600000/60000),sec=Math.floor(d%60000/1000);
+el.innerHTML=`<div class=box>${days}<br><small>Days</small></div><div class=box>${hrs}<br><small>Hrs</small></div><div class=box>${min}<br><small>Min</small></div><div class=box>${sec}<br><small>Sec</small></div>`;
+}
+setInterval(()=>{draw("eng",events.eng);draw("rec",events.rec);draw("wed",events.wed);},1000);
+draw("eng",events.eng);draw("rec",events.rec);draw("wed",events.wed);
+
+const msg=`💛 SAVE THE DATE 💛
+
+Vignesh Kumar ❤️ Yamuna
+
+💐 Engagement: 13 September 2026
+🎉 Reception: 31 October 2026
+💍 Wedding: 1 November 2026
+
+Venue:
+https://maps.app.goo.gl/iPwVBaiHaQXkBGay5
+
+We would be honoured by your presence.`;
+document.getElementById("share").href="https://wa.me/?text="+encodeURIComponent(msg);
+
+const petals=document.getElementById("petals");
+for(let i=0;i<35;i++){
+ let p=document.createElement("div");
+ p.className="petal";
+ p.innerHTML=Math.random()>.5?"🌸":"🌺";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=(6+Math.random()*8)+"s";
+ p.style.animationDelay=(-Math.random()*12)+"s";
+ petals.appendChild(p);
+}
+function toggleMusic(){
+let a=document.getElementById("bgm");
+if(a.paused)a.play();else a.pause();
+}
+</script>
+</body>
+</html>
